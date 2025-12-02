@@ -1,0 +1,52 @@
+Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <_c>
+      <div ref={null} className="rounded-lg...">
+        <_c2>
+        <_c8>
+          <div ref={null} className="p-6 pt-0">
+            <_c>
+              <div className="relative w...">
+                <table ref={null} className="w-full cap...">
+                  <_c2>
+                  <TooltipProvider>
+                    <TooltipProviderProvider scope={undefined} isOpenDelayed={true} delayDuration={700} ...>
+                      <_c4>
+                        <tbody ref={null} className={"[&_tr:la..."}>
+                          <_c8>
+                            <tr ref={null} className="border-b t...">
+                              <_c12>
+                                <td ref={null} className={"p-4 align-middle [&:has([role=checkbox])]:pr-0"}>
++                                 1
+-                                 4
+                              ...
+                          ...
+
+    at throwOnHydrationMismatch (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:4433:11)
+    at prepareToHydrateHostInstance (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:4531:21)
+    at completeWork (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:11351:15)
+    at runWithFiberInDEV (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:845:30)
+    at completeUnitOfWork (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15394:19)
+    at performUnitOfWork (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15275:11)
+    at workLoopConcurrentByScheduler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15252:9)
+    at renderRootConcurrent (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15227:15)
+    at performWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14525:13)
+    at performWorkOnRootViaSchedulerTask (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:16350:7)
+    at MessagePort.performWorkUntilDeadline (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/scheduler/cjs/scheduler.development.js:45:48)
+    at td (<anonymous>)
+    at _c12 (webpack-internal:///(app-pages-browser)/./src/components/ui/table.tsx:112:87)
+    at eval (webpack-internal:///(app-pages-browser)/./src/app/inventory/page.tsx:763:128)
+    at Array.map (<anonymous>)
+    at InventoryPage (webpack-internal:///(app-pages-browser)/./src/app/inventory/page.tsx:761:67)
+    at ClientPageRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/client-page.js:20:50)

@@ -1,0 +1,443 @@
+Error: A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary loading={null}>
+        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/login" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+                <ClientPageRoot Component={function LoginPage} searchParams={{}} params={{}}>
+                  <LoginPage params={Promise} searchParams={Promise}>
+                    <div className="min-h-scre...">
+                      <ModernLoginBackground>
+                        <style>
+                        <div className="fixed inse..." style={{...}}>
+                          <FloatingIcon Icon={{...}} style={{left:"51.8...", ...}}>
+                            <div
+                              style={{
++                               left: "51.88290300254577%"
+-                               left: "94.7907%"
++                               top: "78.02892540184327%"
+-                               top: "69.903%"
++                               animation: "float-0 15s ease-in-out infinite"
+-                               animation-duration: "15s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-0"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                              <Server size={43.19330447842348} strokeWidth={1.5}>
+                                <_c ref={null} iconNode={[...]} className="lucide-server" size={43.19330447842348} ...>
+                                  <svg
+                                    ref={null}
+                                    xmlns="http://www.w3.org/2000/svg"
++                                   width={43.19330447842348}
+-                                   width="66.91970312463971"
++                                   height={43.19330447842348}
+-                                   height="66.91970312463971"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={1.5}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-server"
+                                  >
+                          <FloatingIcon Icon={{...}} style={{left:"51.7...", ...}}>
+                            <div
+                              style={{
++                               left: "51.745304810015%"
+-                               left: "9.88112%"
++                               top: "27.478397168825907%"
+-                               top: "13.2819%"
++                               animation: "float-1 17s ease-in-out infinite"
+-                               animation-duration: "17s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-1"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                              <Shield size={47.942913532108385} strokeWidth={1.5}>
+                                <_c ref={null} iconNode={[...]} className="lucide-shield" size={47.942913532108385} ...>
+                                  <svg
+                                    ref={null}
+                                    xmlns="http://www.w3.org/2000/svg"
++                                   width={47.942913532108385}
+-                                   width="49.89341467385628"
++                                   height={47.942913532108385}
+-                                   height="49.89341467385628"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={1.5}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-shield"
+                                  >
+                          <FloatingIcon Icon={{...}} style={{left:"45.5...", ...}}>
+                            <div
+                              style={{
++                               left: "45.580204879095675%"
+-                               left: "61.2966%"
++                               top: "29.178624985404824%"
+-                               top: "42.5918%"
++                               animation: "float-2 19s ease-in-out infinite"
+-                               animation-duration: "19s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-2"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                              <Zap size={67.34782628929354} strokeWidth={1.5}>
+                                <_c ref={null} iconNode={[...]} className="lucide-zap" size={67.34782628929354} ...>
+                                  <svg
+                                    ref={null}
+                                    xmlns="http://www.w3.org/2000/svg"
++                                   width={67.34782628929354}
+-                                   width="49.329803747667086"
++                                   height={67.34782628929354}
+-                                   height="49.329803747667086"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={1.5}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-zap"
+                                  >
+                          <FloatingIcon Icon={{...}} style={{left:"76.7...", ...}}>
+                            <div
+                              style={{
++                               left: "76.76074479750629%"
+-                               left: "10.2673%"
++                               top: "27.057323393709765%"
+-                               top: "24.7779%"
++                               animation: "float-0 21s ease-in-out infinite"
+-                               animation-duration: "21s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-0"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                              <Database size={55.672246568463095} strokeWidth={1.5}>
+                                <_c ref={null} iconNode={[...]} className="lucide-dat..." size={55.672246568463095} ...>
+                                  <svg
+                                    ref={null}
+                                    xmlns="http://www.w3.org/2000/svg"
++                                   width={55.672246568463095}
+-                                   width="43.4056714397928"
++                                   height={55.672246568463095}
+-                                   height="43.4056714397928"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={1.5}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-database"
+                                  >
+                          <FloatingIcon Icon={{...}} style={{left:"22.5...", ...}}>
+                            <div
+                              style={{
++                               left: "22.562309728446817%"
+-                               left: "34.7771%"
++                               top: "50.05316718685386%"
+-                               top: "28.0876%"
++                               animation: "float-1 23s ease-in-out infinite"
+-                               animation-duration: "23s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-1"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                              <Lock size={62.801742866373644} strokeWidth={1.5}>
+                                <_c ref={null} iconNode={[...]} className="lucide-lock" size={62.801742866373644} ...>
+                                  <svg
+                                    ref={null}
+                                    xmlns="http://www.w3.org/2000/svg"
++                                   width={62.801742866373644}
+-                                   width="61.224964440972684"
++                                   height={62.801742866373644}
+-                                   height="61.224964440972684"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={1.5}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-lock"
+                                  >
+                          <FloatingIcon Icon={{...}} style={{left:"57.9...", ...}}>
+                            <div
+                              style={{
++                               left: "57.90926431646852%"
+-                               left: "92.3205%"
++                               top: "97.38689574056588%"
+-                               top: "90.3542%"
++                               animation: "float-2 25s ease-in-out infinite"
+-                               animation-duration: "25s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-2"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                              <Cloud size={65.43661067874248} strokeWidth={1.5}>
+                                <_c ref={null} iconNode={[...]} className="lucide-cloud" size={65.43661067874248} ...>
+                                  <svg
+                                    ref={null}
+                                    xmlns="http://www.w3.org/2000/svg"
++                                   width={65.43661067874248}
+-                                   width="65.75046641409932"
++                                   height={65.43661067874248}
+-                                   height="65.75046641409932"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={1.5}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-cloud"
+                                  >
+                          <FloatingIcon Icon={{...}} style={{left:"68.9...", ...}}>
+                            <div
+                              style={{
++                               left: "68.96674474668227%"
+-                               left: "10.6166%"
++                               top: "41.071869474679744%"
+-                               top: "69.2765%"
++                               animation: "float-0 27s ease-in-out infinite"
+-                               animation-duration: "27s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-0"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                              <HardDrive size={62.10830303325206} strokeWidth={1.5}>
+                                <_c ref={null} iconNode={[...]} className="lucide-har..." size={62.10830303325206} ...>
+                                  <svg
+                                    ref={null}
+                                    xmlns="http://www.w3.org/2000/svg"
++                                   width={62.10830303325206}
+-                                   width="68.10490401028167"
++                                   height={62.10830303325206}
+-                                   height="68.10490401028167"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={1.5}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-hard-drive"
+                                  >
+                          <FloatingIcon Icon={{...}} style={{left:"4.30...", ...}}>
+                            <div
+                              style={{
++                               left: "4.30532482845547%"
+-                               left: "78.4228%"
++                               top: "38.27104586384063%"
+-                               top: "55.9285%"
++                               animation: "float-1 29s ease-in-out infinite"
+-                               animation-duration: "29s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-1"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                              <Network size={43.480517507706224} strokeWidth={1.5}>
+                                <_c ref={null} iconNode={[...]} className="lucide-net..." size={43.480517507706224} ...>
+                                  <svg
+                                    ref={null}
+                                    xmlns="http://www.w3.org/2000/svg"
++                                   width={43.480517507706224}
+-                                   width="66.03134485975076"
++                                   height={43.480517507706224}
+-                                   height="66.03134485975076"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={1.5}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-network"
+                                  >
+                          <FloatingIcon Icon={{...}} style={{left:"64.3...", ...}}>
+                            <div
+                              style={{
++                               left: "64.3164730795642%"
+-                               left: "91.1142%"
++                               top: "21.66769440070835%"
+-                               top: "53.6423%"
++                               animation: "float-2 31s ease-in-out infinite"
+-                               animation-duration: "31s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-2"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                              <Server size={59.625028101599334} strokeWidth={1.5}>
+                                <_c ref={null} iconNode={[...]} className="lucide-server" size={59.625028101599334} ...>
+                                  <svg
+                                    ref={null}
+                                    xmlns="http://www.w3.org/2000/svg"
++                                   width={59.625028101599334}
+-                                   width="58.346220854194264"
++                                   height={59.625028101599334}
+-                                   height="58.346220854194264"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={1.5}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-server"
+                                  >
+                          <FloatingIcon Icon={{...}} style={{left:"95.8...", ...}}>
+                            <div
+                              style={{
++                               left: "95.80271721922551%"
+-                               left: "73.5169%"
++                               top: "28.791159929384314%"
+-                               top: "98.7421%"
++                               animation: "float-0 33s ease-in-out infinite"
+-                               animation-duration: "33s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-0"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                              <Shield size={40.09017793166315} strokeWidth={1.5}>
+                                <_c ref={null} iconNode={[...]} className="lucide-shield" size={40.09017793166315} ...>
+                                  <svg
+                                    ref={null}
+                                    xmlns="http://www.w3.org/2000/svg"
++                                   width={40.09017793166315}
+-                                   width="75.35516354649988"
++                                   height={40.09017793166315}
+-                                   height="75.35516354649988"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={1.5}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-shield"
+                                  >
+                          ...
+                      ...
+                ...
+
+    at createConsoleError (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/errors/console-error.js:27:71)
+    at handleConsoleError (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/errors/use-error-handler.js:47:54)
+    at console.error (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/globals/intercept-console-error.js:47:57)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:4626:19)
+    at runWithFiberInDEV (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:845:30)
+    at emitPendingHydrationWarnings (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:4625:9)
+    at completeWork (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:11257:18)
+    at runWithFiberInDEV (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:848:13)
+    at completeUnitOfWork (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15394:19)
+    at performUnitOfWork (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15275:11)
+    at workLoopConcurrentByScheduler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15252:9)
+    at renderRootConcurrent (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15227:15)
+    at performWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14525:13)
+    at performWorkOnRootViaSchedulerTask (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:16350:7)
+    at MessagePort.performWorkUntilDeadline (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/scheduler/cjs/scheduler.development.js:45:48)
+    at svg (<anonymous>)
+    at _c (webpack-internal:///(app-pages-browser)/./node_modules/lucide-react/dist/esm/Icon.js:18:78)
+    at Server (webpack-internal:///(app-pages-browser)/./node_modules/lucide-react/dist/esm/createLucideIcon.js:19:82)
+    at FloatingIcon (webpack-internal:///(app-pages-browser)/./src/components/ModernLoginBackground.tsx:21:94)
+    at eval (webpack-internal:///(app-pages-browser)/./src/components/ModernLoginBackground.tsx:72:127)
+    at Array.map (<anonymous>)
+    at ModernLoginBackground (webpack-internal:///(app-pages-browser)/./src/components/ModernLoginBackground.tsx:72:35)
+    at LoginPage (webpack-internal:///(app-pages-browser)/./src/app/login/page.tsx:67:88)
+    at ClientPageRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/client-page.js:20:50)

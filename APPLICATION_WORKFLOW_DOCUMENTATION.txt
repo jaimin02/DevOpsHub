@@ -1,0 +1,1161 @@
+================================================================================
+                    DEVOPS HUB APPLICATION WORKFLOW DOCUMENTATION
+                          Sarjen Systems Pvt Ltd
+================================================================================
+
+Version: 1.0
+Date: December 2, 2025
+Technology Stack: Next.js 15.3.3, TypeScript, Tailwind CSS, Radix UI
+Database: PostgreSQL (Neon-backed)
+UI Framework: React with Server Components
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+
+1. System Overview
+2. Application Architecture
+3. User Flow & Authentication
+4. Page Workflows & Functionalities
+5. Data Models & Database Schema
+6. API Integration Points
+7. Security & Access Control
+8. Error Handling & Notifications
+
+================================================================================
+1. SYSTEM OVERVIEW
+================================================================================
+
+DevOps Hub is a comprehensive infrastructure management platform designed for
+organizations to manage server infrastructure, database credentials, security,
+port management, installation qualification (IQ) records, and user administration.
+
+Core Features:
+- User Authentication & Authorization
+- Server Infrastructure Management
+- Database Credential Management
+- Port Management & Rules
+- Security & Antivirus Configuration
+- Installation Qualification (IQ) Tracking
+- Reporting & Analytics
+- User & Role Management
+- Department Organization
+- System Notifications
+
+================================================================================
+2. APPLICATION ARCHITECTURE
+================================================================================
+
+2.1 TECHNICAL ARCHITECTURE
+---------------------------
+
+Frontend:
+  - Next.js 15.3.3 (React Framework)
+  - TypeScript for type safety
+  - Tailwind CSS for styling
+  - Radix UI component library
+  - React Hook Form for form management
+  - Zod for schema validation
+
+Backend:
+  - Next.js API Routes
+  - Server-side session management
+  - Authentication middleware
+
+Database:
+  - PostgreSQL (Neon-backed)
+  - ORM: (to be implemented)
+
+Deployment:
+  - Replit autoscale
+  - Build: npm run build
+  - Start: npm start
+  - Port: 5000
+
+2.2 DIRECTORY STRUCTURE
+------------------------
+
+src/
+├── app/
+│   ├── page.tsx                 # Home/Login Page
+│   ├── globals.css              # Global styles
+│   ├── (authenticated)/         # Protected route group
+│   │   ├── layout.tsx           # Shared authenticated layout
+│   │   ├── dashboard/
+│   │   ├── notifications/
+│   │   ├── inventory/
+│   │   ├── locations/
+│   │   ├── os/
+│   │   ├── database-providers/
+│   │   ├── db-credentials/
+│   │   ├── dept-name/
+│   │   ├── environment/
+│   │   ├── antivirus/
+│   │   ├── iq-details/
+│   │   ├── iq-master/
+│   │   ├── iq-required/
+│   │   ├── iq-review/
+│   │   ├── port-management/
+│   │   ├── reports/
+│   │   ├── role-master/
+│   │   ├── security/
+│   │   ├── server-infrastructure/
+│   │   ├── user-administration/
+│   │   ├── user-management/
+│   │   └── master/
+│   └── forgot-password/         # Password recovery
+├── components/
+│   ├── ui/                      # Radix UI components
+│   ├── ModernLoginBackground.tsx
+│   ├── DevOpsHubLogo.tsx
+│   ├── NotificationsPanel.tsx
+│   └── [other components]
+├── lib/
+│   └── [utility functions]
+├── context/
+│   └── [React context providers]
+└── hooks/
+    └── [custom React hooks]
+
+================================================================================
+3. USER FLOW & AUTHENTICATION
+================================================================================
+
+3.1 LOGIN WORKFLOW (Logical Flow)
+-----------------------------------
+
+ENTRY POINT: /
+    ↓
+User visits application root URL
+    ↓
+Check Authentication Status
+    ↓
+NOT AUTHENTICATED?
+    ├─→ Display Login Page
+    │     ↓
+    │   User Enters Credentials
+    │     ├─ Username Field Validation (min 1 char)
+    │     └─ Password Field Validation (min 6 chars)
+    │     ↓
+    │   Form Validation via Zod Schema
+    │     ├─ Success: Enable Submit Button
+    │     └─ Error: Show Validation Messages
+    │     ↓
+    │   User Clicks "Sign In"
+    │     ↓
+    │   Loading State Activated
+    │     ├─ Show spinner
+    │     └─ Change button text to "Signing in..."
+    │     ↓
+    │   (Simulate 2-second authentication delay)
+    │     ↓
+    │   Authentication Verification
+    │     ├─ Success: Redirect to /dashboard
+    │     └─ Error: Show error message
+    │
+    └─→ AUTHENTICATED?
+          ├─ Redirect to /dashboard
+          └─ Load authenticated routes
+
+3.2 LOGIN PAGE PHYSICAL LAYOUT
+--------------------------------
+
+┌─────────────────────────────────────────────────────────────────┐
+│                                                                   │
+│        [Animated Gradient Background: Blue → Purple]             │
+│        [Floating Infrastructure Icons: Server, Shield, etc]      │
+│                                                                   │
+│                   ┌─────────────────────────┐                    │
+│                   │   DevOps Hub Logo       │                    │
+│                   │   [Icon in center]      │                    │
+│                   ├─────────────────────────┤                    │
+│                   │ DevOps Hub              │ (Gradient Text)    │
+│                   │ Enter your credentials  │                    │
+│                   │ to access workspace     │                    │
+│                   ├─────────────────────────┤                    │
+│                   │ Username:               │                    │
+│                   │ [________]              │                    │
+│                   │ Password:               │                    │
+│                   │ [________] [👁️]        │ Forgot password?   │
+│                   │ [Sign In →]             │                    │
+│                   ├─────────────────────────┤                    │
+│                   │ © 2025 Sarjen Systems   │                    │
+│                   │ Privacy • Terms • Support│                    │
+│                   └─────────────────────────┘                    │
+│                                                                   │
+└─────────────────────────────────────────────────────────────────┘
+
+================================================================================
+4. PAGE WORKFLOWS & FUNCTIONALITIES
+================================================================================
+
+4.1 DASHBOARD PAGE (/dashboard)
+---------------------------------
+
+LOGICAL WORKFLOW:
+  Entry Point: User logs in successfully
+      ↓
+  Load Dashboard Layout
+      ├─ Header (Search, Notifications, Theme, User Menu)
+      ├─ Sidebar (Navigation)
+      └─ Main Content Area
+      ↓
+  Fetch Dashboard Data
+      ├─ Server Infrastructure Count
+      ├─ Security Status
+      ├─ IQ Records Status
+      ├─ Active Users
+      ├─ System Health
+      └─ Recent Notifications
+      ↓
+  Display Dashboard Tiles
+      ├─ Color-coded tiles with gradients
+      ├─ Hover animations (scale & brighten)
+      ├─ Icons with numbers/metrics
+      └─ Clickable tiles to navigate to respective pages
+
+PHYSICAL LAYOUT:
+  ┌─────────────────────────────────────────────────────────┐
+  │ ☰ [Logo] │     Search Box      │🔔│🌙│👤 Admin▼        │
+  ├─────────────────────────────────────────────────────────┤
+  │ Dashboard                                                 │
+  │ ├─ Overview                                               │
+  │ ├─ Quick Stats                                            │
+  │ └─ Recent Activity                                        │
+  │                                                            │
+  │ ┌──────────┬──────────┬──────────┬──────────┐            │
+  │ │ Servers  │ Security │ IQ Status│ Users    │            │
+  │ │   42     │   84%    │   98%    │   156    │            │
+  │ │ (Tile)   │ (Tile)   │ (Tile)   │ (Tile)   │            │
+  │ └──────────┴──────────┴──────────┴──────────┘            │
+  │                                                            │
+  │ ┌──────────┬──────────┬──────────┐                        │
+  │ │Locations │ Depts    │ Env      │                        │
+  │ │    8     │    12    │    5     │                        │
+  │ │ (Tile)   │ (Tile)   │ (Tile)   │                        │
+  │ └──────────┴──────────┴──────────┘                        │
+
+FUNCTIONALITY:
+  - Real-time metrics display
+  - Tile click navigation to detail pages
+  - Color-coded status indicators
+  - Auto-refresh capability
+  - System health monitoring
+
+4.2 SERVER INFRASTRUCTURE PAGE (/server-infrastructure)
+---------------------------------------------------------
+
+LOGICAL WORKFLOW:
+  Entry Point: User clicks on Server Infrastructure tile/menu
+      ↓
+  Load Server List
+      ├─ Fetch all servers from database
+      ├─ Apply filters (location, status, environment)
+      └─ Sort by name/date/status
+      ↓
+  Display Server Table/Cards
+      ├─ Server Name
+      ├─ IP Address
+      ├─ Location
+      ├─ OS Type
+      ├─ Status (Online/Offline)
+      ├─ Environment (Dev/Staging/Prod)
+      └─ Actions (View, Edit, Delete)
+      ↓
+  User Actions
+      ├─ View: Show server details
+      ├─ Edit: Modify server configuration
+      ├─ Add New: Create new server entry
+      └─ Delete: Remove server (with confirmation)
+      ↓
+  Save/Update Database
+
+PHYSICAL LAYOUT:
+  ┌──────────────────────────────────────────────────────┐
+  │ Header & Navigation                                   │
+  ├──────────────────────────────────────────────────────┤
+  │ Server Infrastructure                                │
+  │ [Add New Server] [Filter] [Search]                  │
+  ├──────────────────────────────────────────────────────┤
+  │ Name      │ IP         │ Location │ Status │ Actions│
+  │ SRV-001   │ 192.168.1.1│ NYC      │ Online │ ▼      │
+  │ SRV-002   │ 192.168.1.2│ NYC      │ Offline│ ▼      │
+  │ SRV-003   │ 192.168.1.3│ LON      │ Online │ ▼      │
+
+FUNCTIONALITY:
+  - Add/Edit/Delete servers
+  - Filter by location, environment, status
+  - Search functionality
+  - Bulk operations
+  - Export to Excel/PDF
+  - Real-time status monitoring
+
+4.3 DATABASE CREDENTIALS PAGE (/db-credentials)
+-------------------------------------------------
+
+LOGICAL WORKFLOW:
+  Entry Point: User navigates to DB Credentials
+      ↓
+  Load Credentials List
+      ├─ Fetch all database credentials
+      ├─ Apply filters (database type, environment)
+      └─ Sort and display securely (masked passwords)
+      ↓
+  Display Credentials Table
+      ├─ Credential Name
+      ├─ Database Type (MySQL, PostgreSQL, etc)
+      ├─ Host
+      ├─ Port
+      ├─ Database Name
+      ├─ Environment
+      └─ Actions (View, Edit, Delete, Copy)
+      ↓
+  User Actions
+      ├─ View: Display credential details
+      ├─ Edit: Modify credential
+      ├─ Add: Create new credential
+      ├─ Delete: Remove credential
+      └─ Copy: Copy to clipboard (with confirmation)
+      ↓
+  Security Measures
+      ├─ Mask sensitive data (passwords)
+      ├─ Log access attempts
+      ├─ Audit trail for changes
+      └─ Encryption at rest
+
+FUNCTIONALITY:
+  - Secure credential storage
+  - Password masking
+  - Credential validation
+  - Connection testing
+  - Encryption/decryption
+  - Audit logging
+  - Multiple database type support
+
+4.4 PORT MANAGEMENT PAGE (/port-management)
+---------------------------------------------
+
+LOGICAL WORKFLOW:
+  Entry Point: User navigates to Port Management
+      ↓
+  Load Port Rules
+      ├─ Fetch all port configurations
+      ├─ Load port allocation mapping
+      └─ Display available/used ports
+      ↓
+  Display Port Management Interface
+      ├─ Port Number
+      ├─ Service Name
+      ├─ Protocol (TCP/UDP)
+      ├─ Server Assignment
+      ├─ Status (Open/Closed)
+      └─ Actions (Configure, Close, Open)
+      ↓
+  User Actions
+      ├─ Create New Rule: Assign port to service
+      ├─ Edit Rule: Modify port configuration
+      ├─ Enable/Disable: Toggle port state
+      ├─ View: Show detailed port info
+      └─ Delete: Remove port rule
+      ↓
+  Firewall Integration
+      ├─ Update firewall rules
+      ├─ Validate port availability
+      └─ Check port conflicts
+
+FUNCTIONALITY:
+  - Port allocation & tracking
+  - Firewall rule management
+  - Port conflict detection
+  - Service assignment
+  - Open/Close port operations
+  - Port monitoring
+  - Alert on port changes
+
+4.5 SECURITY PAGE (/security)
+-------------------------------
+
+LOGICAL WORKFLOW:
+  Entry Point: User navigates to Security
+      ↓
+  Load Security Configuration
+      ├─ Antivirus settings
+      ├─ Firewall rules
+      ├─ SSL certificates
+      ├─ Security policies
+      └─ Compliance status
+      ↓
+  Display Security Dashboard
+      ├─ Overall Security Score
+      ├─ Threat Status
+      ├─ Firewall Status
+      ├─ Antivirus Status
+      ├─ Latest Threats
+      └─ Security Alerts
+      ↓
+  User Actions
+      ├─ Configure Security Policies
+      ├─ Enable/Disable Antivirus
+      ├─ Update Firewall Rules
+      ├─ Manage SSL Certificates
+      └─ Review Security Logs
+      ↓
+  Update Security Settings
+
+FUNCTIONALITY:
+  - Firewall management
+  - Antivirus configuration
+  - SSL certificate management
+  - Security policy enforcement
+  - Threat monitoring
+  - Compliance tracking
+  - Security audit logs
+
+4.6 IQ MANAGEMENT PAGES
+------------------------
+
+4.6.1 IQ Master (/iq-master)
+WORKFLOW:
+  Entry → Load IQ Master List
+  → Display IQ templates/standards
+  → User creates/edits/deletes IQ master records
+  → Store in database
+
+FUNCTIONALITY:
+  - Create IQ master templates
+  - Define IQ requirements
+  - Set IQ standards
+  - Version control
+  - Template management
+
+4.6.2 IQ Details (/iq-details)
+WORKFLOW:
+  Entry → Load IQ Details for specific systems
+  → Show detailed IQ checklists
+  → User fills out IQ details
+  → Save to database
+  → Generate reports
+
+FUNCTIONALITY:
+  - Detailed IQ documentation
+  - Checklist completion tracking
+  - Attachment storage
+  - Timestamp recording
+  - Progress tracking
+
+4.6.3 IQ Required (/iq-required)
+WORKFLOW:
+  Entry → Load IQ requirement list
+  → Display required vs completed
+  → Show compliance status
+  → Highlight overdue items
+
+FUNCTIONALITY:
+  - IQ requirement tracking
+  - Compliance monitoring
+  - Due date management
+  - Status reporting
+
+4.6.4 IQ Review (/iq-review)
+WORKFLOW:
+  Entry → Load IQ review data
+  → Display review status
+  → Show approvals/rejections
+  → Generate review reports
+
+FUNCTIONALITY:
+  - Review approvals
+  - QA certification
+  - Compliance sign-off
+  - Historical records
+
+4.7 USER ADMINISTRATION PAGE (/user-administration)
+-----------------------------------------------------
+
+LOGICAL WORKFLOW:
+  Entry Point: Admin navigates to User Admin
+      ↓
+  Load User List
+      ├─ Fetch all users
+      ├─ Display user information
+      └─ Show user status/role
+      ↓
+  Display Users Table
+      ├─ User ID
+      ├─ Name
+      ├─ Email
+      ├─ Role
+      ├─ Department
+      ├─ Status (Active/Inactive)
+      └─ Actions (Edit, Disable, Delete)
+      ↓
+  Admin Actions
+      ├─ Create User: Add new user account
+      ├─ Edit User: Modify user details
+      ├─ Disable User: Deactivate account
+      ├─ Assign Role: Set user permissions
+      ├─ Assign Department: Organize users
+      └─ Reset Password: Send reset link
+      ↓
+  Update User Database
+
+FUNCTIONALITY:
+  - User account management
+  - Role assignment
+  - Department assignment
+  - Status management
+  - Bulk user operations
+  - User audit trail
+
+4.8 NOTIFICATIONS PAGE (/notifications)
+-----------------------------------------
+
+LOGICAL WORKFLOW:
+  Entry Point: User clicks bell icon or notifications link
+      ↓
+  Load Notifications
+      ├─ Fetch unread notifications
+      ├─ Fetch read notifications
+      ├─ Apply filters (type, date)
+      └─ Sort by latest first
+      ↓
+  Display Notifications List
+      ├─ Notification Type (Server, Security, IQ, User, System)
+      ├─ Message/Title
+      ├─ Timestamp
+      ├─ Read Status
+      └─ Actions (Mark Read, Delete)
+      ↓
+  User Actions
+      ├─ View: Show notification details
+      ├─ Mark as Read: Update read status
+      ├─ Delete: Remove notification
+      ├─ Navigate: Go to related page
+      └─ Filter: Filter by type/status
+      ↓
+  Update Notification Status
+
+PHYSICAL LAYOUT (Dropdown):
+  ┌─────────────────────────┐
+  │ Notifications    [x]    │
+  ├─────────────────────────┤
+  │ New Server Added    [x] │
+  │ 2 min ago              │
+  ├─────────────────────────┤
+  │ Security Alert      [x] │
+  │ 15 min ago             │
+  ├─────────────────────────┤
+  │ IQ Review Required  [x] │
+  │ 1 hour ago             │
+  ├─────────────────────────┤
+  │ View All Notifications  │
+  └─────────────────────────┘
+
+FUNCTIONALITY:
+  - Real-time notifications
+  - Notification types (5 types)
+  - Read/unread tracking
+  - Notification filtering
+  - Notification cleanup
+  - Notification preferences
+
+4.9 OTHER MANAGEMENT PAGES
+-----------------------------
+
+Locations (/locations)
+  - Add/Edit/Delete locations
+  - Assign servers to locations
+  - Location-based filtering
+
+OS Management (/os)
+  - Manage OS types/versions
+  - OS compatibility matrix
+  - Update tracking
+
+Database Providers (/database-providers)
+  - Manage database vendors
+  - Provider settings
+  - License management
+
+Department Management (/dept-name)
+  - Create departments
+  - Assign users to departments
+  - Department hierarchy
+
+Environment Management (/environment)
+  - Dev, Staging, Production environments
+  - Environment-specific settings
+  - Configuration management
+
+Antivirus Management (/antivirus)
+  - Antivirus configuration
+  - Virus definition updates
+  - Scan scheduling
+
+Reports (/reports)
+  - Infrastructure reports
+  - Security reports
+  - IQ compliance reports
+  - User activity reports
+  - Export functionality (PDF/Excel)
+
+Role Master (/role-master)
+  - Define user roles
+  - Set permissions per role
+  - Role hierarchy
+
+User Management (/user-management)
+  - User profile management
+  - Password management
+  - User preferences
+  - Activity tracking
+
+Master Data (/master)
+  - Central data management
+  - System configuration
+  - Reference data maintenance
+
+================================================================================
+5. AUTHENTICATED LAYOUT STRUCTURE
+================================================================================
+
+5.1 HEADER COMPONENT
+---------------------
+
+┌────────────────────────────────────────────────────────────────────────┐
+│ ☰ Logo │        Search Box: "Search servers..."      │🔔 │🌙│👤 Admin▼│
+└────────────────────────────────────────────────────────────────────────┘
+
+Features:
+  - Hamburger Menu: Toggle sidebar
+  - Search Bar: Global search across all entities
+  - Notifications Bell: Shows unread count, opens dropdown
+  - Theme Toggle: Switch light/dark mode
+  - User Avatar: Shows user initials, opens user menu
+
+5.2 SIDEBAR NAVIGATION
+-----------------------
+
+┌──────────────────┐
+│ ☰ DevOps Hub     │
+├──────────────────┤
+│ 🏠 Dashboard     │
+│ 📋 IQ Master     │
+│   ├─ IQ Details  │
+│   ├─ IQ Required │
+│   └─ IQ Review   │
+│ 🔒 Security      │
+│ 📊 Reports       │
+│ ⚙️ Master        │
+│ 👥 User Admin    │
+│                  │
+│ System: Online   │
+└──────────────────┘
+
+Features:
+  - Collapsible/expandable on hover
+  - Active state highlighting
+  - Submenu support
+  - Organized categorization
+  - System status indicator
+
+5.3 USER MENU DROPDOWN
+-----------------------
+
+┌──────────────────────────┐
+│ Admin User               │
+│ admin@example.com        │
+├──────────────────────────┤
+│ ⚙️  Settings             │
+│ 🔔 Notifications         │
+│ 🚪 Logout                │
+└──────────────────────────┘
+
+================================================================================
+6. DATA MODELS & DATABASE SCHEMA
+================================================================================
+
+6.1 USER MODEL
+---------------
+
+Table: users
+  - id (UUID, PK)
+  - username (VARCHAR, UNIQUE)
+  - email (VARCHAR, UNIQUE)
+  - password_hash (VARCHAR)
+  - first_name (VARCHAR)
+  - last_name (VARCHAR)
+  - role_id (FK → roles)
+  - department_id (FK → departments)
+  - status (ENUM: active, inactive, suspended)
+  - created_at (TIMESTAMP)
+  - updated_at (TIMESTAMP)
+  - last_login (TIMESTAMP)
+
+6.2 SERVER MODEL
+-----------------
+
+Table: servers
+  - id (UUID, PK)
+  - name (VARCHAR, UNIQUE)
+  - ip_address (INET)
+  - hostname (VARCHAR)
+  - os_id (FK → os_types)
+  - location_id (FK → locations)
+  - environment_id (FK → environments)
+  - status (ENUM: online, offline, maintenance)
+  - created_at (TIMESTAMP)
+  - updated_at (TIMESTAMP)
+
+6.3 DATABASE CREDENTIALS MODEL
+--------------------------------
+
+Table: db_credentials
+  - id (UUID, PK)
+  - name (VARCHAR)
+  - db_type (ENUM: mysql, postgresql, oracle, mssql)
+  - host (VARCHAR)
+  - port (INTEGER)
+  - database_name (VARCHAR)
+  - username (VARCHAR)
+  - password (VARCHAR, encrypted)
+  - environment_id (FK → environments)
+  - created_at (TIMESTAMP)
+  - updated_at (TIMESTAMP)
+
+6.4 PORT MANAGEMENT MODEL
+---------------------------
+
+Table: ports
+  - id (UUID, PK)
+  - port_number (INTEGER)
+  - protocol (ENUM: tcp, udp)
+  - service_name (VARCHAR)
+  - server_id (FK → servers)
+  - status (ENUM: open, closed)
+  - description (TEXT)
+  - created_at (TIMESTAMP)
+  - updated_at (TIMESTAMP)
+
+6.5 NOTIFICATIONS MODEL
+------------------------
+
+Table: notifications
+  - id (UUID, PK)
+  - user_id (FK → users)
+  - type (ENUM: server, security, iq, user, system)
+  - title (VARCHAR)
+  - message (TEXT)
+  - is_read (BOOLEAN)
+  - related_entity_id (VARCHAR)
+  - related_entity_type (VARCHAR)
+  - created_at (TIMESTAMP)
+  - updated_at (TIMESTAMP)
+
+6.6 IQ RECORDS MODEL
+----------------------
+
+Table: iq_masters
+  - id (UUID, PK)
+  - name (VARCHAR)
+  - description (TEXT)
+  - version (VARCHAR)
+  - created_by (FK → users)
+  - created_at (TIMESTAMP)
+
+Table: iq_details
+  - id (UUID, PK)
+  - iq_master_id (FK → iq_masters)
+  - system_id (FK → servers)
+  - checklist_items (JSONB)
+  - completion_percentage (INTEGER)
+  - status (ENUM: pending, in_progress, completed, approved)
+  - created_at (TIMESTAMP)
+  - updated_at (TIMESTAMP)
+
+================================================================================
+7. SECURITY & ACCESS CONTROL
+================================================================================
+
+7.1 AUTHENTICATION FLOW
+------------------------
+
+1. User enters credentials on login page
+2. Form validation using Zod schema
+3. Credentials sent to backend authentication API
+4. Password verification against stored hash
+5. Session creation and JWT token generation
+6. Token stored in secure HTTP-only cookie
+7. User redirected to dashboard
+8. All subsequent requests include token validation
+
+7.2 AUTHORIZATION LEVELS
+--------------------------
+
+Roles:
+  - Super Admin: Full system access
+  - Admin: User and system management
+  - Manager: Department/team management
+  - User: Limited access to assigned resources
+  - Viewer: Read-only access
+
+Permission Matrix:
+  ┌─────────────────────┬─────────┬────────┬─────────┬────────┬────────┐
+  │ Resource            │ Super   │ Admin  │Manager  │ User   │Viewer  │
+  ├─────────────────────┼─────────┼────────┼─────────┼────────┼────────┤
+  │ Dashboard           │ ✓ ✓ ✓   │ ✓ ✓ ✓  │ ✓ ✓ ✗   │ ✓ ✗ ✗  │ ✓ ✗ ✗  │
+  │ Servers (CRD)       │ ✓ ✓ ✓   │ ✓ ✓ ✓  │ ✓ ✓ ✗   │ ✓ ✗ ✗  │ ✓ ✗ ✗  │
+  │ Credentials (CRD)   │ ✓ ✓ ✓   │ ✓ ✓ ✓  │ ✗ ✗ ✗   │ ✗ ✗ ✗  │ ✓ ✗ ✗  │
+  │ Security (CRD)      │ ✓ ✓ ✓   │ ✓ ✓ ✓  │ ✗ ✗ ✗   │ ✗ ✗ ✗  │ ✗ ✗ ✗  │
+  │ Users (CRD)         │ ✓ ✓ ✓   │ ✓ ✓ ✓  │ ✗ ✗ ✗   │ ✗ ✗ ✗  │ ✗ ✗ ✗  │
+  │ Reports (View)      │ ✓       │ ✓      │ ✓       │ ✓      │ ✓      │
+  └─────────────────────┴─────────┴────────┴─────────┴────────┴────────┘
+  C=Create, R=Read, D=Delete, U=Update
+
+7.3 DATA PROTECTION
+---------------------
+
+- Passwords: Hashed using bcrypt with salt
+- Sensitive Data: Encrypted at rest using AES-256
+- Credentials: Double encryption (application + database)
+- API Calls: HTTPS/TLS 1.2+
+- Tokens: JWT with 24-hour expiration
+- Sessions: Server-side session management
+- CSRF Protection: Token-based CSRF prevention
+- XSS Protection: Input sanitization and output encoding
+
+7.4 AUDIT & LOGGING
+---------------------
+
+Logged Events:
+  - User login/logout
+  - Data modifications (Create/Update/Delete)
+  - Credential access
+  - Role changes
+  - Permission changes
+  - Security policy updates
+  - Failed authentication attempts
+
+Log Storage:
+  - Centralized audit log table
+  - Timestamp, user, action, entity, old/new values
+  - Retention: 1 year minimum
+  - Searchable and reportable
+
+================================================================================
+8. ERROR HANDLING & NOTIFICATIONS
+================================================================================
+
+8.1 ERROR TYPES & RESPONSES
+-----------------------------
+
+Validation Errors (400):
+  - Form field validation failures
+  - Schema validation errors
+  - Display inline error messages
+
+Authentication Errors (401):
+  - Invalid credentials
+  - Expired session
+  - Missing authentication token
+  - Action: Redirect to login
+
+Authorization Errors (403):
+  - Insufficient permissions
+  - Role-based access denied
+  - Display: "Access Denied" message
+
+Not Found Errors (404):
+  - Resource does not exist
+  - Invalid entity ID
+  - Display: "Resource not found"
+
+Server Errors (500):
+  - Database errors
+  - Server exceptions
+  - Display: Generic error message
+  - Log: Detailed error for debugging
+
+8.2 NOTIFICATION SYSTEM
+------------------------
+
+Notification Types:
+  1. Server Events
+     - Server added/modified/deleted
+     - Server status changed (online/offline)
+     - Server maintenance
+  
+  2. Security Events
+     - Security policy updated
+     - Antivirus alerts
+     - Threat detected
+     - Firewall rule changed
+  
+  3. IQ Events
+     - IQ review required
+     - IQ status changed
+     - IQ approval completed
+  
+  4. User Events
+     - User account created
+     - Role changed
+     - Access granted/revoked
+  
+  5. System Events
+     - System maintenance
+     - Database backup
+     - Report generated
+
+Notification Flow:
+  Event Triggered
+      ↓
+  Create Notification Record
+      ↓
+  Store in Database
+      ↓
+  Display in Bell Icon (Badge Count)
+      ↓
+  Show in Notifications Dropdown
+      ↓
+  Display on Notifications Page
+      ↓
+  Mark Read When Viewed
+      ↓
+  Archive/Delete as Needed
+
+8.3 TOAST/ALERT MESSAGES
+---------------------------
+
+Success Messages:
+  - "Server created successfully"
+  - "Changes saved"
+  - "Credential added"
+  - Display: Green toast, 3 seconds
+
+Error Messages:
+  - "Failed to create server"
+  - "Database connection failed"
+  - Display: Red toast, 5 seconds
+
+Warning Messages:
+  - "You are about to delete this server"
+  - "Unsaved changes"
+  - Display: Yellow toast, 4 seconds
+
+Info Messages:
+  - "Server is being updated"
+  - "Sync in progress"
+  - Display: Blue toast, 3 seconds
+
+================================================================================
+9. SYSTEM INTEGRATION POINTS
+================================================================================
+
+9.1 EXTERNAL INTEGRATIONS
+---------------------------
+
+Potential Integrations:
+  - Cloud Providers: AWS, Azure, GCP
+  - Monitoring Tools: Prometheus, Grafana
+  - Logging: ELK Stack, Datadog
+  - Email Service: SendGrid, AWS SES
+  - Storage: S3, Azure Blob Storage
+  - CI/CD: Jenkins, GitLab CI, GitHub Actions
+
+9.2 API ENDPOINTS (To Be Implemented)
+--------------------------------------
+
+Authentication:
+  POST /api/auth/login
+  POST /api/auth/logout
+  POST /api/auth/refresh-token
+  POST /api/auth/reset-password
+
+Servers:
+  GET /api/servers
+  GET /api/servers/:id
+  POST /api/servers
+  PUT /api/servers/:id
+  DELETE /api/servers/:id
+
+Credentials:
+  GET /api/credentials
+  GET /api/credentials/:id
+  POST /api/credentials
+  PUT /api/credentials/:id
+  DELETE /api/credentials/:id
+
+Ports:
+  GET /api/ports
+  GET /api/ports/:id
+  POST /api/ports
+  PUT /api/ports/:id
+  DELETE /api/ports/:id
+
+Users:
+  GET /api/users
+  GET /api/users/:id
+  POST /api/users
+  PUT /api/users/:id
+  DELETE /api/users/:id
+
+Notifications:
+  GET /api/notifications
+  PUT /api/notifications/:id/read
+  DELETE /api/notifications/:id
+
+================================================================================
+10. DEPLOYMENT & HOSTING
+================================================================================
+
+10.1 HOSTING CONFIGURATION
+---------------------------
+
+Platform: Replit
+Server Type: autoscale
+Port: 5000
+Memory: 4GB (optimized with NODE_OPTIONS)
+Build: npm run build
+Start: npm start
+Environment: Production
+
+10.2 PERFORMANCE OPTIMIZATION
+------------------------------
+
+- Next.js Image Optimization: Automatic image compression
+- Code Splitting: Automatic route-based splitting
+- CSS Minification: Tailwind CSS purging
+- API Response Caching: 5-minute cache for read operations
+- Database Query Optimization: Indexed queries
+- Asset CDN: Next.js automatic CDN integration
+
+10.3 MONITORING & HEALTH CHECKS
+---------------------------------
+
+Health Endpoint: GET /api/health
+  - Database connectivity
+  - API responsiveness
+  - System uptime
+
+Monitoring Metrics:
+  - Page load time
+  - API response time
+  - Database query time
+  - Error rate
+  - User sessions
+  - Resource utilization
+
+================================================================================
+11. USER WORKFLOWS - COMMON SCENARIOS
+================================================================================
+
+11.1 SCENARIO: New Server Onboarding
+--------------------------------------
+
+User Flow:
+  1. Admin logs into DevOps Hub
+  2. Clicks "Server Infrastructure" in sidebar
+  3. Clicks "Add New Server" button
+  4. Fills in server details:
+     - Server name
+     - IP address
+     - OS type
+     - Location
+     - Environment (Dev/Staging/Prod)
+  5. Clicks "Create Server"
+  6. System validates data
+  7. Server record created in database
+  8. Notification sent to relevant teams
+  9. Server appears in inventory
+  10. Admin can now manage ports/credentials for server
+
+11.2 SCENARIO: Security Policy Update
+--------------------------------------
+
+User Flow:
+  1. Security Admin navigates to Security page
+  2. Reviews current security policies
+  3. Updates antivirus settings
+  4. Enables new firewall rules
+  5. Saves changes
+  6. System applies settings across all servers
+  7. Audit log created
+  8. Notification sent to admins
+  9. Compliance report updated
+
+11.3 SCENARIO: IQ Review Process
+---------------------------------
+
+User Flow:
+  1. IQ Manager logs in
+  2. Navigates to IQ Master
+  3. Selects IQ template to apply
+  4. Navigates to IQ Details
+  5. Fills out detailed checklist
+  6. Uploads supporting documentation
+  7. Submits for review
+  8. Reviewer receives notification
+  9. Reviewer checks details
+  10. Reviewer approves/rejects
+  11. Status updated
+  12. Certificate generated if approved
+
+11.4 SCENARIO: User Access Revocation
+--------------------------------------
+
+User Flow:
+  1. Admin navigates to User Administration
+  2. Searches for user to remove
+  3. Clicks "Disable User"
+  4. Confirms action
+  5. System:
+     - Marks user as inactive
+     - Invalidates active sessions
+     - Removes access permissions
+     - Logs action in audit trail
+  6. Notification sent to user and admins
+  7. User cannot login anymore
+
+================================================================================
+12. FUTURE ENHANCEMENTS
+================================================================================
+
+Planned Features:
+  1. Mobile Application (iOS/Android)
+  2. Advanced Analytics Dashboard
+  3. Machine Learning-based Threat Detection
+  4. Multi-tenancy Support
+  5. Advanced Scheduling & Automation
+  6. Third-party API Integrations
+  7. Real-time Collaboration Features
+  8. Advanced Reporting & BI Tools
+  9. Disaster Recovery Management
+  10. Cost Optimization Recommendations
+
+================================================================================
+13. TECHNICAL DEBT & KNOWN LIMITATIONS
+================================================================================
+
+Current Limitations:
+  1. API endpoints not yet implemented (backend needed)
+  2. Database not connected (ORM integration needed)
+  3. Authentication logic simulated (real auth needed)
+  4. Real-time updates via polling only (WebSocket upgrade needed)
+  5. No email notifications (email service integration needed)
+  6. Manual refresh required (auto-sync needed)
+  7. Single server deployment (scaling needed)
+
+Priority Roadmap:
+  Phase 1: Backend API development and database integration
+  Phase 2: Real authentication and authorization implementation
+  Phase 3: Real-time features and WebSocket support
+  Phase 4: Email and external service integrations
+  Phase 5: Advanced features and analytics
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================
+
+Document prepared for: Sarjen Systems Pvt Ltd
+DevOps Hub Application v1.0
+Generated: December 2, 2025

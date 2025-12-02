@@ -1,0 +1,272 @@
+Error: A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <LoadingBoundary loading={null}>
+      <HTTPAccessFallbackBoundary notFound={[...]} forbidden={undefined} unauthorized={undefined}>
+        <HTTPAccessFallbackErrorBoundary pathname="/" notFound={[...]} forbidden={undefined} unauthorized={undefined} ...>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+                <ClientPageRoot Component={function HomePage} searchParams={{}} params={{}}>
+                  <HomePage params={Promise} searchParams={Promise}>
+                    <div className="fixed inse...">
+                      <ModernLoginBackground>
+                        <style>
+                        <div className="fixed inse..." style={{...}}>
+                          <FloatingIcon Icon={{...}} style={{left:"96.2...", ...}}>
+                            <div
+                              style={{
++                               left: "96.22132240614604%"
+-                               left: "69.65%"
++                               top: "88.45210104813688%"
+-                               top: "15.0542%"
++                               animation: "float-0 15s ease-in-out infinite"
+-                               animation-duration: "15s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-0"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                          <FloatingIcon Icon={{...}} style={{left:"7.89...", ...}}>
+                            <div
+                              style={{
++                               left: "7.8919768348890695%"
+-                               left: "34.9678%"
++                               top: "36.48849330830646%"
+-                               top: "27.2559%"
++                               animation: "float-1 17s ease-in-out infinite"
+-                               animation-duration: "17s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-1"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                          <FloatingIcon Icon={{...}} style={{left:"48.4...", ...}}>
+                            <div
+                              style={{
++                               left: "48.49510441871098%"
+-                               left: "19.0065%"
++                               top: "63.13204173111339%"
+-                               top: "45.0221%"
++                               animation: "float-2 19s ease-in-out infinite"
+-                               animation-duration: "19s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-2"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                          <FloatingIcon Icon={{...}} style={{left:"24.1...", ...}}>
+                            <div
+                              style={{
++                               left: "24.11030381980791%"
+-                               left: "62.7893%"
++                               top: "95.06829304034454%"
+-                               top: "43.0414%"
++                               animation: "float-0 21s ease-in-out infinite"
+-                               animation-duration: "21s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-0"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                          <FloatingIcon Icon={{...}} style={{left:"71.3...", ...}}>
+                            <div
+                              style={{
++                               left: "71.33713329549111%"
+-                               left: "83.9713%"
++                               top: "10.914997672277849%"
+-                               top: "99.2582%"
++                               animation: "float-1 23s ease-in-out infinite"
+-                               animation-duration: "23s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-1"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                          <FloatingIcon Icon={{...}} style={{left:"1.52...", ...}}>
+                            <div
+                              style={{
++                               left: "1.5219292858088984%"
+-                               left: "91.3015%"
++                               top: "95.37751582661129%"
+-                               top: "53.8667%"
++                               animation: "float-2 25s ease-in-out infinite"
+-                               animation-duration: "25s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-2"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                          <FloatingIcon Icon={{...}} style={{left:"84.7...", ...}}>
+                            <div
+                              style={{
++                               left: "84.72182970377062%"
+-                               left: "50.7728%"
++                               top: "2.2535700840588757%"
+-                               top: "84.9217%"
++                               animation: "float-0 27s ease-in-out infinite"
+-                               animation-duration: "27s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-0"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                          <FloatingIcon Icon={{...}} style={{left:"43.3...", ...}}>
+                            <div
+                              style={{
++                               left: "43.343528538089494%"
+-                               left: "69.7605%"
++                               top: "5.188267234439414%"
+-                               top: "7.92297%"
++                               animation: "float-1 29s ease-in-out infinite"
+-                               animation-duration: "29s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-1"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                          <FloatingIcon Icon={{...}} style={{left:"67.6...", ...}}>
+                            <div
+                              style={{
++                               left: "67.64127978037912%"
+-                               left: "68.7024%"
++                               top: "71.72681204974609%"
+-                               top: "89.4196%"
++                               animation: "float-2 31s ease-in-out infinite"
+-                               animation-duration: "31s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-2"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                          <FloatingIcon Icon={{...}} style={{left:"51.4...", ...}}>
+                            <div
+                              style={{
++                               left: "51.47895335661868%"
+-                               left: "87.8754%"
++                               top: "78.0996912960624%"
+-                               top: "64.0314%"
++                               animation: "float-0 33s ease-in-out infinite"
+-                               animation-duration: "33s"
+-                               animation-timing-function: "ease-in-out"
+-                               animation-delay: "0s"
+-                               animation-iteration-count: "infinite"
+-                               animation-direction: "normal"
+-                               animation-fill-mode: "none"
+-                               animation-play-state: "running"
+-                               animation-name: "float-0"
+-                               animation-timeline: "auto"
+-                               animation-range-start: "normal"
+-                               animation-range-end: "normal"
+                              }}
+                              className="absolute text-blue-400 opacity-20 pointer-events-none"
+                            >
+                          ...
+                      ...
+                ...
+
+    at createConsoleError (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/errors/console-error.js:27:71)
+    at handleConsoleError (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/errors/use-error-handler.js:47:54)
+    at console.error (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/globals/intercept-console-error.js:47:57)
+    at Proxy.<anonymous> (https://4a681d2b-687e-4090-a4c0-9573f3d603bf-00-2afb65s0qwv4s.pike.replit.dev/__replco/static/devtools/injected.js:37:27)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:4626:19)
+    at runWithFiberInDEV (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:845:30)
+    at emitPendingHydrationWarnings (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:4625:9)
+    at completeWork (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:11257:18)
+    at runWithFiberInDEV (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:848:13)
+    at completeUnitOfWork (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15394:19)
+    at performUnitOfWork (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15275:11)
+    at workLoopConcurrentByScheduler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15252:9)
+    at renderRootConcurrent (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15227:15)
+    at performWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14525:13)
+    at performWorkOnRootViaSchedulerTask (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:16350:7)
+    at MessagePort.performWorkUntilDeadline (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/scheduler/cjs/scheduler.development.js:45:48)
+    at div (<anonymous>)
+    at FloatingIcon (webpack-internal:///(app-pages-browser)/./src/components/ModernLoginBackground.tsx:22:87)
+    at eval (webpack-internal:///(app-pages-browser)/./src/components/ModernLoginBackground.tsx:83:127)
+    at Array.map (<anonymous>)
+    at ModernLoginBackground (webpack-internal:///(app-pages-browser)/./src/components/ModernLoginBackground.tsx:83:35)
+    at HomePage (webpack-internal:///(app-pages-browser)/./src/app/page.tsx:67:88)
+    at ClientPageRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/client-page.js:20:50)
